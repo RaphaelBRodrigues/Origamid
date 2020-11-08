@@ -12,7 +12,7 @@ function App() {
       </ul>
       
       
-      {pathname == "/products" 
+      {pathname === "/products" 
       ?
         <Products/>
       :
