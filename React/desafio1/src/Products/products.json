@@ -1,0 +1,10 @@
+[
+    {
+        "nome":"Notebook",
+        "propiedades":["16gb ram","512gb"]
+    },
+    {
+        "nome": "Smartphone",
+        "propiedades": ["2gb ram","128gb"]
+    }
+]
