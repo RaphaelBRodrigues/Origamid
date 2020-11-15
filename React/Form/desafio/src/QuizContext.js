@@ -17,7 +17,6 @@ export function QuizStorage({ children }) {
   const [quiz, setQuiz] = useState(INITIAL_STATE);
 
   function nextQuestion() {
-    console.info(quiz);
     setQuiz((state) => {
       return {
         ...state,

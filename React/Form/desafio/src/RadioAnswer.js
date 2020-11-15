@@ -7,7 +7,6 @@ const RadioAnswer = ({ question, setSelectedAnswer }) => {
         return (
           <div key={opt}>
             <label>
-              {opt}
               <input
                 type="radio"
                 name={question.id}
@@ -15,6 +14,7 @@ const RadioAnswer = ({ question, setSelectedAnswer }) => {
                 required
                 onChange={({ target }) => setSelectedAnswer(target.value)}
               />
+              {opt}
             </label>
           </div>
         );
