@@ -3,8 +3,10 @@ import Footer from './Components/Footer';
 import Header from './Components/Header';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
+import User from './Pages/User';
 import './App.css';
 import UserStorage from './UserContext';
+import ProtectedRoute from './Components/Helper/ProtecteRoute';
 
 function App() {
   return (
@@ -13,7 +15,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login/*" element={<Login />} />
+          <Route path="login/*" element={<Login />} />
+          <ProtectedRoute path="conta/*" element={<User />} />
         </Routes>
         <Footer />
       </UserStorage>

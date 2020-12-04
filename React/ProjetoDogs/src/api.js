@@ -36,3 +36,16 @@ export function TOKEN_VALIDATE_POST(token) {
     },
   };
 }
+
+export function USER_POST(body) {
+  return {
+    url: API_URL + '/api/user',
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(body),
+    },
+  };
+}
