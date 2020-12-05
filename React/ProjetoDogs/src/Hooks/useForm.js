@@ -10,6 +10,10 @@ const types = {
     message:
       'A senha deve ter no mínimo 4 caracteres, pelo menos 1 letra e 1 número',
   },
+  number: {
+    regex: /^\d+$/,
+    message: 'Utilize apenas números',
+  },
 };
 
 function useForm(type) {
