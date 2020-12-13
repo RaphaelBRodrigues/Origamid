@@ -1,8 +1,18 @@
 import React from 'react';
-import style from './footer.module.css';
+import style from './feed.module.css';
+import Modal from './Modal';
+import Photos from './Photos';
 
-function Footer() {
-  return <div className={style.teste}>s ssa</div>;
+function Feed() {
+  const [modalPhoto, setModalPhoto] = React.useState(null);
+
+  return (
+    <div className={style.teste}>
+      {modalPhoto && <Modal setModalPhoto={setModalPhoto} photo={modalPhoto} />}
+
+      <Photos setModalPhoto={setModalPhoto} />
+    </div>
+  );
 }
 
-export default Footer;
+export default Feed;
