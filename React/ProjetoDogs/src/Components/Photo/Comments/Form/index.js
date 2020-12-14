@@ -5,7 +5,7 @@ import useFetch from '../../../../Hooks/useFetch';
 import { COMMENT_POST } from '../../../../api';
 import Error from '../../../Helper/Error';
 
-function Form({ id, setComments }) {
+function Form({ id, setComments, single }) {
   const [comment, setComment] = React.useState('');
   const { request, error } = useFetch();
 
@@ -21,7 +21,10 @@ function Form({ id, setComments }) {
     }
   }
   return (
-    <form onSubmit={handleSubmit} className={style.form}>
+    <form
+      onSubmit={handleSubmit}
+      className={`${style.form} ${single ? style.single : ''}`}
+    >
       <textarea
         className={style.textarea}
         id="comment"

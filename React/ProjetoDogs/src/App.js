@@ -7,17 +7,25 @@ import User from './Pages/User';
 import './App.css';
 import UserStorage from './UserContext';
 import ProtectedRoute from './Components/Helper/ProtecteRoute';
+import Photo from './Pages/Photo';
+import UserProfile from './Pages/UserProfile';
+import NotFound from './Pages/NotFound';
 
 function App() {
   return (
     <BrowserRouter>
       <UserStorage>
         <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="login/*" element={<Login />} />
-          <ProtectedRoute path="conta/*" element={<User />} />
-        </Routes>
+        <main className="appBody">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="login/*" element={<Login />} />
+            <Route path="foto/:id" element={<Photo />} />
+            <Route path="perfil/:user" element={<UserProfile />} />
+            <ProtectedRoute path="conta/*" element={<User />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
         <Footer />
       </UserStorage>
     </BrowserRouter>

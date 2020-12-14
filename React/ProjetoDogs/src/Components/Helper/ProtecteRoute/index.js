@@ -4,7 +4,6 @@ import { UserContext } from '../../../UserContext';
 
 const ProtectedRoute = (props) => {
   const { isLogged } = React.useContext(UserContext);
-  console.log(isLogged);
 
   if (isLogged === true) {
     return <Route {...props} />;

@@ -6,20 +6,24 @@ import Error from '../../../Components/Helper/Error';
 import { PHOTOS_GET } from '../../../api';
 import Loading from '../../Helper/Loading';
 
-function Photos({ setModalPhoto }) {
+function Photos({ setModalPhoto, user, page, setInfinite }) {
   const { data, loading, error, request } = useFetch();
 
   React.useEffect(() => {
     async function fetchPhotos() {
+      const total = 3;
       const { url, options } = PHOTOS_GET({
-        page: 1,
-        total: 62,
-        user: 0,
+        page,
+        total,
+        user: user || 0,
       });
-      const { response, json } = await request(url, options);
+      const { resp, json } = await request(url, options);
+      if (resp && resp.ok && json.length < total) {
+        setInfinite(false);
+      }
     }
     fetchPhotos();
-  }, [request]);
+  }, [request, page]);
   if (error) return <Error />;
   if (loading) return <Loading />;
   if (data)

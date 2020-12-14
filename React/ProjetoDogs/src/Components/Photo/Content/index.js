@@ -4,16 +4,17 @@ import { UserContext } from '../../../UserContext';
 import PhotoComments from '../Comments';
 import Delete from '../Delete';
 import style from './content.module.css';
+import Image from '../../Helper/Image/';
 
-function PhotoContent({ data }) {
+function PhotoContent({ data, single }) {
   const { photo, comments } = data;
   const user = useContext(UserContext);
-  console.info(user);
 
   return (
-    <div className={style.photo}>
+    <div className={`${style.photo} ${single ? style.single : ''} `}>
       <div className={style.img}>
-        <img src={photo.src} alt={photo.alt} />
+        <Image src={photo.src} alt={photo.alt} />
+        {/* <img src={photo.src} alt={photo.alt} /> */}
       </div>
       <div className={style.details}>
         <div>
@@ -36,7 +37,7 @@ function PhotoContent({ data }) {
           </ul>
         </div>
       </div>
-      <PhotoComments id={photo.id} comments={comments} />
+      <PhotoComments single={single} id={photo.id} comments={comments} />
     </div>
   );
 }

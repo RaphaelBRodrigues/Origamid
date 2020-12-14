@@ -84,7 +84,6 @@ export const PHOTO_GET = (id) => {
 };
 
 export const COMMENT_POST = (id, body) => {
-  console.log(body);
   return {
     url: API_URL + '/api/comment/' + id,
     options: {
@@ -106,6 +105,44 @@ export const PHOTO_DELETE = (id) => {
         Authorization: 'Bearer ' + window.localStorage.getItem('token'),
       },
       method: 'DELETE',
+    },
+  };
+};
+
+export const PASSWORD_LOST = (body) => {
+  return {
+    url: API_URL + '/api/password/lost',
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(body),
+    },
+  };
+};
+
+export const PASSWORD_RESET = (body) => {
+  return {
+    url: API_URL + '/api/password/reset',
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(body),
+    },
+  };
+};
+
+export const STATS_GET = () => {
+  return {
+    url: API_URL + '/api/stats',
+    options: {
+      headers: {
+        Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+      },
+      method: 'GET',
     },
   };
 };

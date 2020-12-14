@@ -85,3 +85,17 @@
     grid-row: 1;
   }
 }
+
+.single.photo {
+  grid-template-columns: 1fr;
+  height: auto;
+}
+.single .img {
+  grid-row: 1;
+  overflow: hidden;
+  border-radius: 2rem;
+}
+
+.single .details {
+  padding: 1rem 0 0 0;
+}

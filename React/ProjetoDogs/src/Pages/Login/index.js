@@ -7,6 +7,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { UserContext } from '../../UserContext';
 
 import styles from './login.module.css';
+import NotFound from '../NotFound';
 
 function Login() {
   const { isLogged } = useContext(UserContext);
@@ -19,7 +20,8 @@ function Login() {
           <Route path="/" element={<LoginForm />} />
           <Route path="criar" element={<LoginCreate />} />
           <Route path="perdeu" element={<LoginPasswordLost />} />
-          <Route path="resetar" element={<LoginPasswordReset />} />
+          <Route path="resetar" element={<LoginPasswordReset />} />{' '}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </section>

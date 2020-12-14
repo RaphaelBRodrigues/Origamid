@@ -86,5 +86,15 @@ a {
 }
 
 .mainContainer {
-  margin-top: 4rem;
+  margin-top: 2rem;
+}
+
+.appBody {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh + 10rem);
+}
+
+.VictoryContainer {
+  height: initial !important;
 }

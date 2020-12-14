@@ -1,10 +1,10 @@
 import React from 'react';
-import style from './modal.module.css';
-import useFetch from '../../../Hooks/useFetch';
-import Error from '../../Helper/Error';
-import Loading from '../../Helper/Loading';
-import PhotoContent from '../Photo/Content';
-import { PHOTO_GET } from '../../../api';
+import style from './photo.module.css';
+import useFetch from '../../Hooks/useFetch';
+import Error from '../../Components/Helper/Error';
+import Loading from '../../Components/Helper/Loading';
+import PhotoContent from './Content';
+import { PHOTO_GET } from '../../api';
 
 function Modal({ photo }) {
   const { data, error, loading, request } = useFetch();
@@ -16,7 +16,7 @@ function Modal({ photo }) {
   }, [photo, request]);
 
   return (
-    <div className={style.modal}>
+    <div>
       {error && <Error error={error} />}
       {loading && <Loading error={error} />}
       {data && <PhotoContent data={data} />}

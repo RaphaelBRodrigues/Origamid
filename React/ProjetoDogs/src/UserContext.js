@@ -63,7 +63,6 @@ function UserStorage({ children }) {
           if (!resp.ok) throw new Error('Token inválido');
           getUser(token);
         } catch (err) {
-          console.error(err);
           setError(true);
           userLogout();
         } finally {
