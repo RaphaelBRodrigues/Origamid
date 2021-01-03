@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.min.js"></script>
+</head>
+
+<body>
+
+  <details>
+    <summary> Aluno </summary>
+    <h3>Nome:</h3><span id="name"></span>
+    <h3>Email:</h3><span id="email"></span> <input id='updateEmail' /><button id="updateEmailButton">Atualizar</button>
+    <h3>Dias restantes:</h3><span id="days"></span>
+    <button id="decrease"> Diminuir dias</button> <button id="increase"> Aumentar dias</button>
+  </details>
+
+  <details open id="aulas">
+    <summary>Aulas</summary>
+    <ul>
+
+    </ul>
+  </details>
+  <button id="completar">Completar curso</button>
+  <button id="resetar">Resetar curso</button>
+
+
+
+</body>
+
+</html>
+
+<script type="module">
+  import store from './store/configureStore.js';
+  import {
+    increaseTime,
+    decreaseTime,
+    modifyEmail
+  } from './store/aluno/actions.js';
+
+  import {
+    completeClass, completeCourse, resetCourse
+  } from './store/aulas/actions.js';
+
+
+
+  const cacheSelector = {
+    aluno: {
+      info: {
+        name: document.getElementById("name"),
+        email: document.getElementById("email"),
+        days: document.getElementById("days")
+      },
+      update: {
+        updateEmail: document.getElementById("updateEmail"),
+        updateEmailButton: document.getElementById("updateEmailButton")
+      },
+      daysButtons: {
+        increase: document.getElementById("increase"),
+        decrease: document.getElementById("decrease")
+      },
+    },
+    aulas: {
+      list: document.querySelector("#aulas ul"),
+      completar: document.querySelector("#completar"),
+      resetar: document.querySelector("#resetar")
+
+    }
+  };
+
+  function updateStudent() {
+    const { name, email, days } = cacheSelector.aluno.info;
+    const { aluno, aulas } = store.getState();
+    name.innerText = aluno.nome;
+    email.innerText = aluno.email;
+    days.innerText = aluno.diasRestantes;
+  };
+
+  function updateClass() {
+    const { aulas } = store.getState();
+    const El = cacheSelector.aulas;
+    El.list.innerHTML = "";
+    const $items = aulas.map(({ id, nome, completa }) => {
+      const $el = document.createElement("li");
+
+      $el.innerHTML = `
+        <h1>${nome} ${completa ? "OK" : "Pendente"}</h1>
+      `;
+
+      const $button = document.createElement("button");
+
+      $button.innerText = "Completar aula";
+      $button.addEventListener("click", ({ currentTarget }) => {
+        store.dispatch(completeClass(id));
+        currentTarget.disabled = true;
+      }
+      );
+
+      $el.append($button);
+
+      return $el;
+
+    });
+
+    $items.forEach(($item) => {
+      El.list.append($item);
+    });
+
+
+  };
+  updateStudent();
+  updateClass();
+
+  const { aluno, aulas } = cacheSelector;
+
+  aluno.daysButtons.decrease.addEventListener("click", () => {
+    store.dispatch(decreaseTime());
+  });
+  aluno.daysButtons.increase.addEventListener("click", () => {
+    store.dispatch(increaseTime());
+    const state = store.getState();
+  });
+
+  aluno.update.updateEmailButton.addEventListener("click", () => {
+    const { value } = aluno.update.updateEmail;
+    store.dispatch(modifyEmail(value));
+  });
+
+  aulas.completar.addEventListener("click", () => {
+    store.dispatch(completeCourse());
+  });
+  aulas.resetar.addEventListener("click", () => {
+    store.dispatch(resetCourse());
+  });
+
+
+
+  store.subscribe(() => {
+    updateStudent();
+    updateClass();
+  });
+</script>
